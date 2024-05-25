@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class Calculator {
@@ -63,8 +60,8 @@ public class Calculator {
 
     private static void startLongestWordSearcher() {
         System.out.println("Введите размер массива.");
-        while (!scanner.hasNextInt()) {
-            System.out.println("Некорректный ввод! Введите целое число для задания размера массива");
+        while (!scanner.hasNext("[0-9]\\d*")) {
+            System.out.println("Некорректный ввод! Введите целое положительное число для задания размера массива");
             scanner.next();
         }
         int arraySize = scanner.nextInt();
@@ -74,7 +71,7 @@ public class Calculator {
             System.out.printf("Введите строку для добавления в массив. Осталось ввести %d строк(и)\n", arraySize - i);
             values.add(scanner.next());
         }
-        Collections.sort(values);
+        values.sort(Comparator.comparingInt(String::length));
         System.out.printf("Самая длинна строка в списке - %s", values.get(arraySize - 1));
     }
 
