@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class Calculator {
@@ -8,9 +9,10 @@ public class Calculator {
     public static void main(String[] args) {
         scanner = new Scanner(System.in);
 
-        System.out.println("Введите номер задания:\n1 - Калькулятор\n2 - Вывод самой длинной строки в массиве");
+        System.out.println("Введите номер задания:\n1 - Калькулятор\n2 - Вывод самой длинной строки в массиве\n" +
+                "3 - Задание с массивом\n4 - Сладкий подарок");
 
-        while (!scanner.hasNext("[1-2]")) {
+        while (!scanner.hasNext("[1-4]")) {
             System.out.println("Некорректный ввод! Введите корректный номер задания.");
             scanner.next();
         }
@@ -22,6 +24,12 @@ public class Calculator {
                 break;
             case "2":
                 startLongestWordSearcher();
+                break;
+            case "3":
+                Task_3.task3_1();
+                break;
+            case "4":
+                Task_3.task3_2();
                 break;
         }
         scanner.close();
@@ -66,13 +74,19 @@ public class Calculator {
         }
         int arraySize = scanner.nextInt();
         List<String> values = new ArrayList<>(arraySize);
+        int maxLength = 0;
 
         for (int i = 0; i < arraySize; i++) {
             System.out.printf("Введите строку для добавления в массив. Осталось ввести %d строк(и)\n", arraySize - i);
             values.add(scanner.next());
+            if (values.get(i).length() > maxLength) {
+                maxLength = values.get(i).length();
+            }
         }
-        values.sort(Comparator.comparingInt(String::length));
-        System.out.printf("Самая длинна строка в списке - %s", values.get(arraySize - 1));
+        int finalMaxLength = maxLength;
+        List<String> resultList = values.stream().filter(e -> e.length() == finalMaxLength).collect(Collectors.toList());
+        System.out.println("Самая длинная строка(или строки) в массиве:");
+        resultList.forEach(System.out::println);
     }
 
     /**
