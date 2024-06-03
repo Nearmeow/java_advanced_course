@@ -1,4 +1,5 @@
 import calculator.Calculator;
+import calculator.ConsoleCalculator;
 import task5.Task_5;
 
 import java.util.*;
@@ -23,8 +24,8 @@ public class App {
 
         switch (task) {
             case "1":
-                Calculator calculator = new Calculator(scanner);
-                calculator.start();
+                ConsoleCalculator calculator = new ConsoleCalculator(scanner);
+                calculator.startConsoleCalculator();
                 break;
             case "2":
                 startLongestWordSearcher();

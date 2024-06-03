@@ -1,60 +1,68 @@
 package calculator;
 
-import calculator.operations.*;
-
-import java.util.Scanner;
-
 public class Calculator {
 
-    private Scanner scanner;
-    private Operation operation;
+    private int operation;
+    private float a;
+    private float b;
 
-    public Calculator(Scanner scanner) {
-        this.scanner = scanner;
+    public Calculator(float a, float b, int operation) throws CalculatorException {
+        this.a = a;
+        this.b = b;
+        checkOperation(operation);
+        this.operation = operation;
     }
 
-    public void start() {
-        System.out.println("Введите число a, число может быть дробным:");
-        float a = getNextFloat();
-
-        System.out.println("Введите число b, число может быть дробным:");
-        float b = getNextFloat();
-
-        System.out.println("Введите номер операции, которую хотите выполнить:\n1 - Сложение\n2 - Вычитание\n3 - Деленение\n4 - Умножение");
-
-        while (!scanner.hasNext("[1-4]")) {
-            System.out.println("Некорректный ввод! Введите корректный номер операции.");
-            scanner.next();
-        }
-        String op = scanner.next();
-
-        switch (op) {
-            case "1":
-                operation = new Addition();
-                break;
-            case "2":
-                operation = new Subtraction();
-                break;
-            case "3":
-                operation = new Division();
-                break;
-            case "4":
-                operation = new Multiplication();
-                break;
-        }
-        operation.perform(a, b);
-        operation.printResult();
+    public Calculator() {
     }
 
-    /**
-     * Метод для получения следующего float числа из консоли.
-     * При вводе любого значения, не являющегося float числом, будет выведено сообщение и ввод необходимо повторить.
-     */
-    protected float getNextFloat() {
-        while (!scanner.hasNextFloat()) {
-            System.out.println("Некорректный ввод! Введите новое число.");
-            scanner.next();
+    public float getA() {
+        return a;
+    }
+
+    public void setA(float a) {
+        this.a = a;
+    }
+
+    public float getB() {
+        return b;
+    }
+
+    public void setB(float b) {
+        this.b = b;
+    }
+
+    public int getOperation() {
+        return operation;
+    }
+
+    public void setOperation(int operation) throws CalculatorException {
+        checkOperation(operation);
+        this.operation = operation;
+    }
+
+    public float getResult() {
+        float result = 0;
+        switch (operation) {
+            case 1:
+                result = a + b;
+                break;
+            case 2:
+                result = a - b;
+                break;
+            case 3:
+                result = a / b;
+                break;
+            case 4:
+                result = a * b;
+                break;
         }
-        return scanner.nextFloat();
+        return result;
+    }
+
+    private void checkOperation(int operation) throws CalculatorException {
+        if ((operation < 1) || (operation > 4)) {
+            throw new CalculatorException("Неверный номер операции!");
+        }
     }
 }
