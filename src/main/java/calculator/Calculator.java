@@ -7,8 +7,7 @@ public class Calculator {
     private int operation;
     private float a;
     private float b;
-
-    private float result;
+    private Float result;
 
     public Calculator(float a, float b, int operation) throws CalculatorException {
         this.a = a;
@@ -45,7 +44,10 @@ public class Calculator {
         this.operation = operation;
     }
 
-    public float getResult() {
+    public float getResult() throws CalculatorException {
+        if (result == null) {
+            calculate();
+        }
         return result;
     }
 
@@ -66,6 +68,8 @@ public class Calculator {
             case 4:
                 result = a * b;
                 break;
+            default:
+                throw new CalculatorException("Не указан номер операции!");
         }
         if (Float.isInfinite(result)) {
             throw new CalculatorException("Результат вычисления превышает допустимые границы!");

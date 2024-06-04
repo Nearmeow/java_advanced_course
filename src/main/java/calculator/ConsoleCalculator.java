@@ -26,7 +26,6 @@ public class ConsoleCalculator {
         askForNumber("b");
         calculator.setB(getNextFloat());
         getOperationNumber();
-        calculator.calculate();
         printResult(calculator.getResult());
     }
 
