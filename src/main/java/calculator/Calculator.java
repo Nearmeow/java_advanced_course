@@ -1,10 +1,14 @@
 package calculator;
 
+
+
 public class Calculator {
 
     private int operation;
     private float a;
     private float b;
+
+    private float result;
 
     public Calculator(float a, float b, int operation) throws CalculatorException {
         this.a = a;
@@ -42,7 +46,10 @@ public class Calculator {
     }
 
     public float getResult() {
-        float result = 0;
+        return result;
+    }
+
+    public void calculate() throws CalculatorException {
         switch (operation) {
             case 1:
                 result = a + b;
@@ -51,13 +58,18 @@ public class Calculator {
                 result = a - b;
                 break;
             case 3:
+                if (b == 0) {
+                    throw new CalculatorException("Попытка деления на ноль!");
+                }
                 result = a / b;
                 break;
             case 4:
                 result = a * b;
                 break;
         }
-        return result;
+        if (Float.isInfinite(result)) {
+            throw new CalculatorException("Результат вычисления превышает допустимые границы!");
+        }
     }
 
     private void checkOperation(int operation) throws CalculatorException {

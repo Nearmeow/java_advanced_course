@@ -6,7 +6,6 @@ public class ConsoleCalculator {
 
     private Scanner scanner;
     private Calculator calculator;
-    private float result;
 
     public ConsoleCalculator(Scanner scanner) {
         this.scanner = scanner;
@@ -21,22 +20,17 @@ public class ConsoleCalculator {
         return calculator;
     }
 
-    public float getResult() {
-        return result;
-    }
-
-    public void startConsoleCalculator() {
+    public void startConsoleCalculator() throws CalculatorException {
         askForNumber("a");
         calculator.setA(getNextFloat());
         askForNumber("b");
         calculator.setB(getNextFloat());
         getOperationNumber();
-
-        result = calculator.getResult();
-        printResult();
+        calculator.calculate();
+        printResult(calculator.getResult());
     }
 
-    private void printResult() {
+    private void printResult(float result) {
         System.out.printf("Результат операции: %.4f", result);
     }
 

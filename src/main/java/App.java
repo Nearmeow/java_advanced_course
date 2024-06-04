@@ -1,8 +1,10 @@
-import calculator.Calculator;
+import calculator.CalculatorException;
 import calculator.ConsoleCalculator;
 import task5.Task_5;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 
@@ -25,7 +27,13 @@ public class App {
         switch (task) {
             case "1":
                 ConsoleCalculator calculator = new ConsoleCalculator(scanner);
-                calculator.startConsoleCalculator();
+                try {
+                    calculator.startConsoleCalculator();
+                } catch (CalculatorException e) {
+                    e.printStackTrace();
+                } finally {
+                    scanner.close();
+                }
                 break;
             case "2":
                 startLongestWordSearcher();
