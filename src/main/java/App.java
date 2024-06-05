@@ -27,13 +27,7 @@ public class App {
         switch (task) {
             case "1":
                 ConsoleCalculator calculator = new ConsoleCalculator(scanner);
-                try {
-                    calculator.startConsoleCalculator();
-                } catch (CalculatorException e) {
-                    e.printStackTrace();
-                } finally {
-                    scanner.close();
-                }
+                calculator.startConsoleCalculator();
                 break;
             case "2":
                 startLongestWordSearcher();

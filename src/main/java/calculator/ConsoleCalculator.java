@@ -20,13 +20,17 @@ public class ConsoleCalculator {
         return calculator;
     }
 
-    public void startConsoleCalculator() throws CalculatorException {
+    public void startConsoleCalculator() {
         askForNumber("a");
         calculator.setA(getNextFloat());
         askForNumber("b");
         calculator.setB(getNextFloat());
         getOperationNumber();
-        printResult(calculator.getResult());
+        try {
+            printResult(calculator.getResult());
+        } catch (CalculatorException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void printResult(float result) {

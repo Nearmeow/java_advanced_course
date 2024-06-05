@@ -5,8 +5,8 @@ package calculator;
 public class Calculator {
 
     private int operation;
-    private float a;
-    private float b;
+    private Float a;
+    private Float b;
     private Float result;
 
     public Calculator(float a, float b, int operation) throws CalculatorException {
@@ -51,7 +51,10 @@ public class Calculator {
         return result;
     }
 
-    public void calculate() throws CalculatorException {
+    private void calculate() throws CalculatorException {
+        if (a == null || b == null) {
+            throw new CalculatorException("Не задан один из операндов!");
+        }
         switch (operation) {
             case 1:
                 result = a + b;
